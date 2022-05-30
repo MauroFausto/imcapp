@@ -5,10 +5,16 @@
 package maurofausto.br.edu.fatecjahu.imc.view;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import javax.swing.Action;
+import maurofausto.br.edu.fatecjahu.imc.model.Imc;
 
 /**
  *
- * @author Alex
+ * @author Mauro Fausto
  */
 public class FrmImc extends javax.swing.JFrame {
 
@@ -82,8 +88,11 @@ public class FrmImc extends javax.swing.JFrame {
         txtImc.setOpaque(true);
 
         BtnCalcular.setText("Calcular");
-
-        lblTabelaIMC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alexbatista/br/edu/fatecjahu/imc/res/TabelaIMC.png"))); // NOI18N
+        BtnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCalcularActionPerformed(evt);
+            }
+        });
 
         lblImagemImc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maurofausto/br/edu/fatecjahu/imc/res/TabelaIMC.png"))); // NOI18N
 
@@ -224,6 +233,19 @@ public class FrmImc extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCalcularActionPerformed
+        Imc imc = new Imc();
+        
+        imc.altura = this.tryConvertToFloat(txtAltura.getText());
+        imc.peso = this.tryConvertToFloat(txtPeso.getText());
+        
+        String resultado = this.calcularResultado(imc);
+        lblResultado.setText(resultado);        
+                
+        String recomendacao = this.calcularRecomendacao(imc.imc);
+        lblRecomendacao.setText(recomendacao);        
+    }//GEN-LAST:event_BtnCalcularActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,7 +279,7 @@ public class FrmImc extends javax.swing.JFrame {
                 new FrmImc().setVisible(true);
             }
         });
-    }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCalcular;
@@ -279,23 +301,130 @@ public class FrmImc extends javax.swing.JFrame {
     private javax.swing.JLabel txtImc;
     private javax.swing.JTextField txtPeso;
     // End of variables declaration//GEN-END:variables
-
-    public String calcularResultado(double imc){
+    
+    
+    public String calcularResultado(Imc imc){
         String resultado = "";
+        
         //Cálculo
-        //if (imc <  x ) {
-            resultado = "Frase";
+        imc.imc = imc.calcularImc(imc.altura, imc.peso);
+        imc.imc = imc.imc * 10000;
+        
+        Double truncatedImc = BigDecimal.valueOf(imc.imc)
+                .setScale(2, RoundingMode.HALF_UP).doubleValue();
+        
+        imc.imc = truncatedImc;
+        
+        String imcString = Double.toString(imc.imc);
+
+        if (imc.imc < 19 ) {
+            txtImc.setText(imcString);
+            resultado = "O seu resultado de IMC é : " + imcString + ", "
+                    + "portanto você está na faixa: Abaixo do Peso";
             // Cor do texto(fonte) do Label.
-            lblResultado.setForeground(new Color(0, 0, 0));
+            lblResultado.setBackground(new Color(183, 205, 38));
+            lblResultado.setForeground(Color.white);
             // Cor de fundo (background)
-            //lblResultado.setBackground(new Color( x, y, z));
+            //lblResultado.setBackground(new Color(x, y, z));
             lblResultado.setOpaque(true);
-       // } else if (imc > x,1 && imc < y )
-       //     resultado = "Frase";
-       // } else if ...
+            
+            this.calcularRecomendacao(imc.imc);
+            
+            return resultado;
+        }
+        else if (imc.imc > 19.1 && imc.imc < 24.9 ) {
+            txtImc.setText(imcString);
+            resultado = "O seu resultado de IMC é : " + imcString + ", "
+                    + "portanto você está na faixa: Peso Normal";
+            
+            lblResultado.setBackground(new Color(243, 183, 3));
+            lblResultado.setForeground(Color.white);
+            lblResultado.setOpaque(true);
+            
+            this.calcularRecomendacao(imc.imc);
+            return resultado;
+        } else if (imc.imc > 25 && imc.imc < 29.9 ) {
+            txtImc.setText(imcString);
+            resultado = "O seu resultado de IMC é : " + imcString + ", "
+                    + "portanto você está na faixa: Sobrepeso";
+            
+            lblResultado.setBackground(new Color(243, 146, 12));
+            lblResultado.setForeground(Color.white);
+            lblResultado.setOpaque(true);
+            
+            this.calcularRecomendacao(imc.imc);
+            return resultado;
+        } else if (imc.imc > 30 && imc.imc < 34.9 ) {
+            txtImc.setText(imcString);
+            resultado = "O seu resultado de IMC é : " + imcString + ", "
+                    + "portanto você está na faixa: Obesidade Grau I";
+            
+            lblResultado.setBackground(new Color(236, 88, 29));
+            lblResultado.setForeground(Color.white);
+            lblResultado.setOpaque(true);
+            
+            this.calcularRecomendacao(imc.imc);
+            return resultado;
+        } else if (imc.imc > 35 && imc.imc < 39.9 ) {
+            txtImc.setText(imcString);
+            resultado = "O seu resultado de IMC é : " + imcString + ", "
+                    + "portanto você está na faixa: Obesidade Grau II";
+            
+            lblResultado.setBackground(new Color(233, 28, 29));
+            lblResultado.setForeground(Color.white);
+            lblResultado.setOpaque(true);
+            
+            this.calcularRecomendacao(imc.imc);
+            
+            return resultado;
+        } else if (imc.imc >= 40) {
+            txtImc.setText(imcString);
+            resultado = "O seu resultado de IMC é : " + imcString + ", "
+                    + "portanto você está na faixa: Obesidade Grau III "
+                    + "- Mórbida";
+            
+            lblResultado.setBackground(new Color(198, 24, 28));
+            lblResultado.setForeground(Color.white);
+            lblResultado.setOpaque(true);
+            
+            this.calcularRecomendacao(imc.imc);
+            return resultado;
+        }        
+            
         return resultado;
     }
     
-        
-
+    public String calcularRecomendacao(double imc) {
+        if (imc < 25) {
+            lblResultado.setBackground(Color.green);
+            lblResultado.setForeground(Color.white);
+            return "Não precisa fazer regime.";
+        }            
+        else {
+            lblResultado.setBackground(Color.green);
+            lblResultado.setForeground(Color.white);
+            return "Sim, é necessário fazer regime.";
+        }
+    }
+    
+    public float tryConvertToFloat(String value) {
+        try {
+            if (value.isBlank() || value.isEmpty()) {
+                // Deverá lançar uma exceção do tipo NullException.
+                Float returnValue = Float.parseFloat(value);
+                return returnValue;
+            }
+            // Caso o valor não for vazio ou nulo, irá converter e retornar o
+            // valor da conversão em no tipo float para ser calculado o IMC.
+            // O código é o mesmo...
+            else {
+                Float returnConvertedValue = Float.parseFloat(value);
+                return returnConvertedValue;
+            }
+        }
+        catch (NumberFormatException ex) {
+            System.out.println(ex.getMessage());
+            return 0f;
+        }
+    }
 }

@@ -13,9 +13,9 @@ import static java.lang.Math.pow;
  */
 public class Imc {
     
-    private float altura;
-    private float peso;
-    private double imc;
+    public float altura;
+    public float peso;
+    public double imc;
     
     //Construtor Padrão (Default).
     public Imc() {

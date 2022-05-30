@@ -17,14 +17,5 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("Rodando a partir daqui!!!");
-        
-        Imc imc = new Imc();
-        
-        imc.setAltura(1.70f);
-        imc.setPeso(80f);
-        
-        
-        
     }
-    
 }
