@@ -93,7 +93,7 @@ public class FrmImc extends javax.swing.JFrame {
                 BtnCalcularActionPerformed(evt);
             }
         });
-
+        
         lblImagemImc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/maurofausto/br/edu/fatecjahu/imc/res/TabelaIMC.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlCamposLayout = new javax.swing.GroupLayout(pnlCampos);
@@ -162,21 +162,20 @@ public class FrmImc extends javax.swing.JFrame {
         pnlResultadoLayout.setHorizontalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
-                .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlResultadoLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(lblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlResultadoLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(461, Short.MAX_VALUE))
+            .addGroup(pnlResultadoLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(lblResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlResultadoLayout.setVerticalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -191,7 +190,7 @@ public class FrmImc extends javax.swing.JFrame {
             pnlRecomendacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRecomendacaoLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(lblRecomendacao, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addComponent(lblRecomendacao, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(pnlRecomendacaoLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
@@ -224,7 +223,7 @@ public class FrmImc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlRecomendacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -320,10 +319,10 @@ public class FrmImc extends javax.swing.JFrame {
         if (imc.imc < 19 ) {
             txtImc.setText(imcString);
             resultado = "O seu resultado de IMC é : " + imcString + ", "
-                    + "portanto você está na faixa: Abaixo do Peso";
+                    + "portanto você está na faixa:\n Abaixo do Peso";
             // Cor do texto(fonte) do Label.
             lblResultado.setBackground(new Color(183, 205, 38));
-            lblResultado.setForeground(Color.white);
+            lblResultado.setForeground(Color.black);
             // Cor de fundo (background)
             //lblResultado.setBackground(new Color(x, y, z));
             lblResultado.setOpaque(true);
@@ -335,10 +334,10 @@ public class FrmImc extends javax.swing.JFrame {
         else if (imc.imc > 19.1 && imc.imc < 24.9 ) {
             txtImc.setText(imcString);
             resultado = "O seu resultado de IMC é : " + imcString + ", "
-                    + "portanto você está na faixa: Peso Normal";
+                    + "portanto você está na faixa:\n Peso Normal";
             
             lblResultado.setBackground(new Color(243, 183, 3));
-            lblResultado.setForeground(Color.white);
+            lblResultado.setForeground(Color.black);
             lblResultado.setOpaque(true);
             
             this.calcularRecomendacao(imc.imc);
@@ -346,10 +345,10 @@ public class FrmImc extends javax.swing.JFrame {
         } else if (imc.imc > 25 && imc.imc < 29.9 ) {
             txtImc.setText(imcString);
             resultado = "O seu resultado de IMC é : " + imcString + ", "
-                    + "portanto você está na faixa: Sobrepeso";
+                    + "portanto você está na faixa:\n Sobrepeso";
             
             lblResultado.setBackground(new Color(243, 146, 12));
-            lblResultado.setForeground(Color.white);
+            lblResultado.setForeground(Color.black);
             lblResultado.setOpaque(true);
             
             this.calcularRecomendacao(imc.imc);
@@ -357,10 +356,10 @@ public class FrmImc extends javax.swing.JFrame {
         } else if (imc.imc > 30 && imc.imc < 34.9 ) {
             txtImc.setText(imcString);
             resultado = "O seu resultado de IMC é : " + imcString + ", "
-                    + "portanto você está na faixa: Obesidade Grau I";
+                    + "portanto você está na faixa:\n Obesidade Grau I";
             
             lblResultado.setBackground(new Color(236, 88, 29));
-            lblResultado.setForeground(Color.white);
+            lblResultado.setForeground(Color.black);
             lblResultado.setOpaque(true);
             
             this.calcularRecomendacao(imc.imc);
@@ -368,10 +367,10 @@ public class FrmImc extends javax.swing.JFrame {
         } else if (imc.imc > 35 && imc.imc < 39.9 ) {
             txtImc.setText(imcString);
             resultado = "O seu resultado de IMC é : " + imcString + ", "
-                    + "portanto você está na faixa: Obesidade Grau II";
+                    + "portanto você está na faixa:\n Obesidade Grau II";
             
             lblResultado.setBackground(new Color(233, 28, 29));
-            lblResultado.setForeground(Color.white);
+            lblResultado.setForeground(Color.black);
             lblResultado.setOpaque(true);
             
             this.calcularRecomendacao(imc.imc);
@@ -380,11 +379,11 @@ public class FrmImc extends javax.swing.JFrame {
         } else if (imc.imc >= 40) {
             txtImc.setText(imcString);
             resultado = "O seu resultado de IMC é : " + imcString + ", "
-                    + "portanto você está na faixa: Obesidade Grau III "
+                    + "portanto você está na faixa:\n Obesidade Grau III "
                     + "- Mórbida";
             
             lblResultado.setBackground(new Color(198, 24, 28));
-            lblResultado.setForeground(Color.white);
+            lblResultado.setForeground(Color.black);
             lblResultado.setOpaque(true);
             
             this.calcularRecomendacao(imc.imc);
@@ -396,13 +395,15 @@ public class FrmImc extends javax.swing.JFrame {
     
     public String calcularRecomendacao(double imc) {
         if (imc < 25) {
-            lblResultado.setBackground(Color.green);
-            lblResultado.setForeground(Color.white);
+            lblRecomendacao.setBackground(Color.green);
+            lblRecomendacao.setForeground(Color.white);
+            lblRecomendacao.setOpaque(true);
             return "Não precisa fazer regime.";
         }            
         else {
-            lblResultado.setBackground(Color.green);
-            lblResultado.setForeground(Color.white);
+            lblRecomendacao.setBackground(Color.green);
+            lblRecomendacao.setForeground(Color.white);
+            lblRecomendacao.setOpaque(true);
             return "Sim, é necessário fazer regime.";
         }
     }
